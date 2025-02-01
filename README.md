@@ -42,12 +42,9 @@ For Hardware:
 ### Implementation
 For Software:
 # Installation
-node.js
-chatGPT
-git
-
-### Project Documentation
-For Software:
+- node.js
+- chatGPT
+- git
 
 # Screenshots (Add at least 3)
 Screenshot1
@@ -66,15 +63,6 @@ https://github.com/user-attachments/assets/e4762f34-e24e-42b3-b72c-2ca164c294c0
 https://github.com/user-attachments/assets/effe8fa7-9241-489b-9052-18eadc254ee4
 
 
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
 ### Project Demo
 # Video
 
@@ -83,9 +71,10 @@ https://github.com/user-attachments/assets/84cb676a-d2cf-40bb-bc14-6bc7b241a2da
 
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Thasmiya Ahammed: Develpoment
+- Sreelakshmi A: Research
+- Arunima S: Ideation 
+- Asha Lakshmi V: UI Design and Creativity
 
 ---
 Made with ❤️ at TinkerHub
