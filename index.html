@@ -227,7 +227,6 @@
     <main class="main-content">
         <h1 class="header-title">ᴠɪꜱɪᴏɴ ʙᴇʏᴏɴᴅ ꜱɪɢʜᴛ </h1>
         
-        
         <div class="logo-container">
             <div class="logo-border" id="logoCircle">
                 <div class="logo-inner">
@@ -235,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <h2 style="color: white; margin: 1rem 0;"></h2>
+
         <button class="start-button">Start to Speak</button>
     </main>
 
@@ -243,43 +242,26 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>About Us</h3>
-                <p>Empowering careers through innovative AI-driven interview preparation and resume building solutions.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Email: info@speak2hire.com<br>
-                Phone: (555) 123-4567<br>
-                Location: Silicon Valley, CA</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <p>Careers<br>
-                Privacy Policy<br>
-                Terms of Service</p>
+                <p>Empowering careers through AI-driven interview preparation and resume building.</p>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const logoCircle = document.getElementById('logoCircle');
-            const welcomeAudio = new Audio();
-            welcomeAudio.src = 'welcome-message.mp3';
+            function speakText(text) {
+                const speech = new SpeechSynthesisUtterance(text);
+                speech.lang = "en-US";
+                speech.rate = 1;
+                speech.pitch = 1;
+                speech.volume = 1;
+                window.speechSynthesis.speak(speech);
+            }
 
-            welcomeAudio.play().catch(function(error) {
-                console.log("Audio playback failed:", error);
-            });
-
-            welcomeAudio.addEventListener('play', function() {
-                logoCircle.classList.add('talking');
-            });
-
-            welcomeAudio.addEventListener('ended', function() {
-                logoCircle.classList.remove('talking');
-            });
+            speakText("Welcome to Speak2Hire");
 
             document.querySelector('.start-button').addEventListener('click', function() {
-                console.log('Starting...');
+                speakText("Let's begin your journey with Speak2Hire!");
             });
         });
     </script>
