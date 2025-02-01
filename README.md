@@ -42,9 +42,9 @@ For Hardware:
 ### Implementation
 For Software:
 # Installation
-node.js
-chatGPT
-git
+- node.js
+- chatGPT
+- git
 
 # Screenshots (Add at least 3)
 Screenshot1
