@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Professional Resume - Speak2Hire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: black;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stars-1, .stars-2, .stars-3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: twinkle 4s infinite;
+        }
+
+        .stars-2 {
+            background-size: 100px 100px;
+            animation-delay: -1s;
+        }
+
+        .stars-3 {
+            background-size: 150px 150px;
+            animation-delay: -2s;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .resume-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(45deg, #ff69b4, #9370db, #4169e1) 1;
+        }
+
+        .resume-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff69b4, #9370db, #4169e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .resume-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #9370db;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .experience-item h3, .education-item h3 {
+            color: #ff69b4;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            color: #4169e1;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #ff69b4, #9370db);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .print-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(45deg, #ff69b4, #9370db, #4169e1);
+            border: none;
+            padding: 1rem 2rem;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .print-button:hover {
+            opacity: 0.9;
+        }
+
+        @media print {
+            .stars, .print-button {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .resume-container {
+                margin: 0;
+                padding: 2rem;
+                border: none;
+                background: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <div class="stars-1"></div>
+        <div class="stars-2"></div>
+        <div class="stars-3"></div>
+    </div>
+
+    <div class="resume-container">
+        <div class="resume-header">
+            <h1 id="userName">John Doe</h1>
+            <p id="userTitle">Software Engineer</p>
+            <p id="userContact">email@example.com | (555) 123-4567 | City, Country</p>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p id="userSummary">Dynamic software engineer with expertise in full-stack development...</p>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-title">Experience</h2>
+            <div id="experienceContainer">
+                <!-- Experience items will be dynamically added here -->
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-title">Education</h2>
+            <div id="educationContainer">
+                <!-- Education items will be dynamically added here -->
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-list" id="skillsContainer">
+                <!-- Skills will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <button class="print-button" onclick="window.print()">Print Resume</button>
+
+    <script>
+        // Function to fetch user data from database and populate resume
+        async function fetchAndPopulateResume() {
+            try {
+                const response = await fetch('/api/getUserResume'); // Your API endpoint
+                const userData = await response.json();
+                
+                // Populate basic info
+                document.getElementById('userName').textContent = userData.name;
+                document.getElementById('userTitle').textContent = userData.title;
+                document.getElementById('userContact').textContent = 
+                    `${userData.email} | ${userData.phone} | ${userData.location}`;
+                document.getElementById('userSummary').textContent = userData.summary;
+
+                // Populate experience
+                const expContainer = document.getElementById('experienceContainer');
+                userData.experience.forEach(exp => {
+                    const expItem = document.createElement('div');
+                    expItem.className = 'experience-item';
+                    expItem.innerHTML = `
+                        <h3>${exp.title} at ${exp.company}</h3>
+                        <div class="date">${exp.startDate} - ${exp.endDate}</div>
+                        <p>${exp.description}</p>
+                    `;
+                    expContainer.appendChild(expItem);
+                });
+
+                // Populate education
+                const eduContainer = document.getElementById('educationContainer');
+                userData.education.forEach(edu => {
+                    const eduItem = document.createElement('div');
+                    eduItem.className = 'education-item';
+                    eduItem.innerHTML = `
+                        <h3>${edu.degree}</h3>
+                        <div class="date">${edu.graduationDate}</div>
+                        <p>${edu.school}</p>
+                    `;
+                    eduContainer.appendChild(eduItem);
+                });
+
+                // Populate skills
+                const skillsContainer = document.getElementById('skillsContainer');
+                userData.skills.forEach(skill => {
+                    const skillTag = document.createElement('div');
+                    skillTag.className = 'skill-tag';
+                    skillTag.textContent = skill;
+                    skillsContainer.appendChild(skillTag);
+                });
+
+            } catch (error) {
+                console.error('Error fetching resume data:', error);
+            }
+        }
+
+        // Load resume data when page loads
+        document.addEventListener('DOMContentLoaded', fetchAndPopulateResume);
+    </script>
+</body>
+</html>

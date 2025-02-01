@@ -53,40 +53,6 @@
             color: #9370db;
         }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .stars-1, .stars-2, .stars-3 {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(white 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: twinkle 4s infinite;
-        }
-
-        .stars-2 {
-            background-size: 100px 100px;
-            animation-delay: -1s;
-        }
-
-        .stars-3 {
-            background-size: 150px 150px;
-            animation-delay: -2s;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
         .main-content {
             flex: 1;
             display: flex;
@@ -114,40 +80,6 @@
             margin: 2rem 0;
             position: relative;
             padding: 10px;
-        }
-
-        .logo-border {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-
-        .logo-border.talking {
-            transform: scale(1.1);
-        }
-
-        /* Create animated gradient border */
-        .logo-border::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff69b4, #9370db, #4169e1);
-            border-radius: 50%;
-            z-index: -1;
-            animation: borderRotate 4s linear infinite;
-        }
-
-        @keyframes borderRotate {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-            100% {
-                filter: hue-rotate(360deg);
-            }
         }
 
         .logo-inner {
@@ -218,24 +150,21 @@
         </ul>
     </nav>
 
-    <div class="stars">
-        <div class="stars-1"></div>
-        <div class="stars-2"></div>
-        <div class="stars-3"></div>
-    </div>
-
     <main class="main-content">
         <h1 class="header-title">ᴠɪꜱɪᴏɴ ʙᴇʏᴏɴᴅ ꜱɪɢʜᴛ </h1>
-        
+
         <div class="logo-container">
-            <div class="logo-border" id="logoCircle">
-                <div class="logo-inner">
-                    <img src="./LOGO.png" alt="Speak2Hire Logo">
-                </div>
+            <div class="logo-inner">
+                <img src="./LOGO.png" alt="Speak2Hire Logo">
             </div>
         </div>
 
         <button class="start-button">Start to Speak</button>
+        <a href="resume.html">
+            <button class="start-button">View Resume</button>
+        </a>
+        
+      
     </main>
 
     <footer>
@@ -247,19 +176,31 @@
         </div>
     </footer>
 
+    <!-- Hidden Audio File -->
+    <audio id="welcomeAudio" src="welcome-message.mp3.m4a"></audio>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('welcomeAudio');
+
+            // Function to use Text-to-Speech if audio fails
             function speakText(text) {
                 const speech = new SpeechSynthesisUtterance(text);
-                speech.lang = "en-US";
+                const voices = speechSynthesis.getVoices();
+                speech.voice = voices.find(voice => voice.name.includes("Google US English")) || voices[0];
                 speech.rate = 1;
                 speech.pitch = 1;
                 speech.volume = 1;
                 window.speechSynthesis.speak(speech);
             }
 
-            speakText("Welcome to Speak2Hire");
+            // Try to play the audio file
+            audio.play().catch(error => {
+                console.log("Autoplay blocked, using Text-to-Speech instead:", error);
+                speakText("Welcome to Speak2Hire");
+            });
 
+            // Speak when button is clicked
             document.querySelector('.start-button').addEventListener('click', function() {
                 speakText("Let's begin your journey with Speak2Hire!");
             });
