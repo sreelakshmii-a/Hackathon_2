@@ -258,33 +258,39 @@
                 Terms of Service</p>
             </div>
         </div>
-        
+
     </footer>
 
-    <audio id="welcomeAudio" src="welcome-message.mp3.m4a"></audio>
+    <audio id="welcomeAudio" src="./welcome.m4a"></audio>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const logoCircle = document.getElementById('logoCircle');
-            const welcomeAudio = new Audio();
-            welcomeAudio.src = 'welcome-message.mp3';
-
+            const welcomeAudio = new Audio('welcome-message.mp3');
+    
             welcomeAudio.play().catch(function(error) {
                 console.log("Audio playback failed:", error);
             });
-
+    
             welcomeAudio.addEventListener('play', function() {
                 logoCircle.classList.add('talking');
             });
-
+    
             welcomeAudio.addEventListener('ended', function() {
                 logoCircle.classList.remove('talking');
             });
-
+    
             document.querySelector('.start-button').addEventListener('click', function() {
-                console.log('Starting...');
+                const message = "Welcome to Speak to Hire. You can start speaking now!";
+                const speech = new SpeechSynthesisUtterance(message);
+                speech.lang = 'en-US';
+                speech.rate = 1;
+                speech.pitch = 1;
+                speech.volume = 1;
+                window.speechSynthesis.speak(speech);
             });
         });
     </script>
+    
 </body>
 </html>
