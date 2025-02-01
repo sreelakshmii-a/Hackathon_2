@@ -50,19 +50,20 @@ git
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1]
+Screenshot1
 https://github.com/user-attachments/assets/026537c1-2169-40f8-a7a4-c60e8f4f717e
 
 
-![Screenshot2]
+Screenshot2
 !https://github.com/user-attachments/assets/026ec9e5-185d-4123-b214-97ad8123d7c6
 
 
-![Screenshot3]
+Screenshot3
 https://github.com/user-attachments/assets/e4762f34-e24e-42b3-b72c-2ca164c294c0
 
 # Build Photos
-![Team](Add photo of your team here)
+!Team
+https://github.com/user-attachments/assets/effe8fa7-9241-489b-9052-18eadc254ee4
 
 
 ![Components](Add photo of your components here)
@@ -76,11 +77,10 @@ https://github.com/user-attachments/assets/e4762f34-e24e-42b3-b72c-2ca164c294c0
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
 
-# Additional Demos
-[Add any extra demo materials/links]
+https://github.com/user-attachments/assets/84cb676a-d2cf-40bb-bc14-6bc7b241a2da
+
+
 
 ## Team Contributions
 - [Name 1]: [Specific contributions]
