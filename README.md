@@ -43,7 +43,8 @@ For Hardware:
 For Software:
 # Installation
 - node.js
-- chatGPT
+- vscode
+- discord
 - git
 
 # Screenshots (Add at least 3)
